@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "subject")
-public class SubjectModel extends PanacheEntityBase {
+public class SubjectModel  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

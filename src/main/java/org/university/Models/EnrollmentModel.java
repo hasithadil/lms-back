@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "enrollment")
-public class EnrollmentModel extends PanacheEntityBase {
+public class EnrollmentModel  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

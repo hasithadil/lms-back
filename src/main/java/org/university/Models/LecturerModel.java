@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "lecturer")
-public class LecturerModel extends PanacheEntityBase {
+public class LecturerModel  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

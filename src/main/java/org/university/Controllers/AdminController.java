@@ -1,16 +1,32 @@
 package org.university.Controllers;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.university.Services.StudentService;
+import org.university.dto.StudentDTO;
 
-@Path("/")
+import java.util.List;
+
+@Path("/admin")
 public class AdminController {
+
+    @Inject
+    StudentService studentService;
+
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "admin controller";
+    @Path("/allstudents")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<StudentDTO> getAllStudents(){
+        return studentService.getAllStudents();
+    }
+
+    @POST
+    @Path("/addstudent")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public StudentDTO addStudent(StudentDTO dto){
+        return studentService.createStudent(dto);
     }
 
 }
