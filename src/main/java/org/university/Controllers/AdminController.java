@@ -29,4 +29,18 @@ public class AdminController {
         return studentService.createStudent(dto);
     }
 
+    @PUT
+    @Path("/updatestudent/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public StudentDTO updateStudent(StudentDTO dto, @PathParam("id") Long id){
+        return studentService.updateStudent(id,dto);
+    }
+
+    @DELETE
+    @Path("/deletestudent/{id}")
+    public void deleteStudent(@PathParam("id") long id){
+        studentService.deleteStudent(id);
+    }
+
 }
