@@ -3,29 +3,33 @@ package org.university.Models;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "student")
-public class StudentModel extends PanacheEntityBase {
+public class StudentModel  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
-    public Long s_id;  // primary key
+    private Long s_id;  // primary key
 
     @Column(name = "kc_id" , nullable = false, unique = true)
-    public String kc_id;
+    private String kc_id;
 
     @Column(nullable = false, unique = true)
-    public String email;
+    private String email;
 
     @Column(name = "f_name", nullable = false)
-    public String firstName;
+    private String firstName;
 
     @Column(name = "l_name", nullable = false)
-    public String lastName;
+    private String lastName;
 
     @Column(nullable = false)
-    public String status;  // e.g., "ACTIVE", "INACTIVE"
+    private String status;  // e.g., "ACTIVE", "INACTIVE"
 
 }

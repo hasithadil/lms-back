@@ -2,7 +2,12 @@ package org.university.Models;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "course")
 public class CourseModel extends PanacheEntityBase {
@@ -10,15 +15,15 @@ public class CourseModel extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
-    public long courseId;
+    private long courseId;
 
     @Column(nullable = false)
-    public String name;
+    private String name;
 
     @Column(name = "max_student", nullable = false)
-    public Integer maxStudent;
+    private Integer maxStudent;
 
     @ManyToOne
     @JoinColumn(name = "lec_id")
-    public LecturerModel lecturer; // Reference to Lecturer (FK)
+    private LecturerModel lecturer; // Reference to Lecturer (FK)
 }
