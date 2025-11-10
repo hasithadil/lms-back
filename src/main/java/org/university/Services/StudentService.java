@@ -47,7 +47,7 @@ public class StudentService {
         existingStudent.setFirstName(dto.getFirstName());
         existingStudent.setLastName(dto.getLastName());
         existingStudent.setEmail(dto.getEmail());
-        existingStudent.setStatus(dto.getStatus());
+        existingStudent.setStatus("active");
 
         return studentMapper.toDTO(existingStudent);
     }

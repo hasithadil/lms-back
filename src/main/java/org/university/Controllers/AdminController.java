@@ -35,7 +35,7 @@ public class AdminController {
     @Path("/updatestudent/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public StudentDTO updateStudent(StudentDTO dto, @PathParam("id") Long id){
+    public StudentDTO updateStudent(StudentDTO dto, @PathParam("id") long id){
         return studentService.updateStudent(id,dto);
     }
 
