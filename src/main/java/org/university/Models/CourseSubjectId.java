@@ -2,20 +2,18 @@ package org.university.Models;
 
 // this is for the composite primary key
 
+import lombok.RequiredArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+
+@RequiredArgsConstructor
 public class CourseSubjectId implements Serializable {
 
-    public long courseId;
-    public long subjectId;
+    public final long courseId;
+    public final long subjectId;
 
-    public CourseSubjectId() {}
-
-    public CourseSubjectId(long courseId, long subjectId) {
-        this.courseId = courseId;
-        this.subjectId = subjectId;
-    }
 
     @Override
     public boolean equals(Object o) {

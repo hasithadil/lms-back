@@ -4,8 +4,10 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.university.Services.CourseService;
+import org.university.Services.CourseSubjectService;
 import org.university.Services.SubjectService;
 import org.university.dto.CourseDTO;
+import org.university.dto.CourseSubjectDTO;
 import org.university.dto.SubjectDTO;
 
 import java.util.List;
@@ -73,5 +75,16 @@ public class LecturerController {
     @Path("/deletesubject/{id}")
     public void deleteSubject(@PathParam("id") long id){
         subjectService.deleteSubject(id);
+    }
+
+    @Inject
+    CourseSubjectService courseSubjectService;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/addsubjecttocourse")
+    public CourseSubjectDTO addSubjectToCourse(CourseSubjectDTO dto){
+        return courseSubjectService.addSubjectToCourse(dto);
     }
 }
