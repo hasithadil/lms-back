@@ -8,11 +8,17 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-@RequiredArgsConstructor
 public class CourseSubjectId implements Serializable {
 
-    public final long courseId;
-    public final long subjectId;
+    public long courseId;
+    public long subjectId;
+
+    public CourseSubjectId(long courseId, long subjectId) {
+        this.courseId = courseId;
+        this.subjectId = subjectId;
+    }
+
+    public CourseSubjectId() {}
 
 
     @Override

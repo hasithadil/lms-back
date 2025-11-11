@@ -27,6 +27,6 @@ public class EnrollmentModel  {
     private  CourseModel course;  // Course reference (FK)
 
     @Column(name = "e_date", nullable = false)
-    private LocalDate enrollmentDate; // Enrollment date
+    private LocalDate enrollmentDate = LocalDate.now(); // Enrollment date
 
 }

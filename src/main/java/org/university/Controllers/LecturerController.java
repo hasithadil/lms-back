@@ -17,6 +17,7 @@ public class LecturerController {
     @Inject
     CourseService courseService;
 
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getallcourses")
@@ -86,5 +87,17 @@ public class LecturerController {
     @Path("/addsubjecttocourse")
     public CourseSubjectDTO addSubjectToCourse(CourseSubjectDTO dto){
         return courseSubjectService.addSubjectToCourse(dto);
+    }
+
+    @GET
+    @Path("/{course_id}/subjects")
+    public List<SubjectDTO> getSubjectsByCourse(@PathParam("course_id") long courseId){
+        return courseSubjectService.getSubjectsByCourse(courseId);
+    }
+
+    @DELETE
+    @Path("course/{courseId}/subject/{subjectId}")
+    public void deleteSubject(@PathParam("courseId") long courseId, @PathParam("subjectId") long subjectId){
+        courseSubjectService.removeSubjectFromCourse(courseId, subjectId);
     }
 }
