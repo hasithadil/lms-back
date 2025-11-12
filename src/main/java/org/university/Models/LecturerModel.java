@@ -32,7 +32,8 @@ public class LecturerModel  {
     private String lastName;
 
     @Column(nullable = false)
-    private String status; // ACTIVE / INACTIVE
+    @Enumerated(EnumType.STRING)
+    private Status status; // ACTIVE / INACTIVE
 
     //reverse map to course
     @OneToMany(mappedBy = "lecturer", cascade = CascadeType.ALL, orphanRemoval = true)

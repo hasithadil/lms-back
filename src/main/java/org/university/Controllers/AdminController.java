@@ -6,6 +6,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.university.Services.LecturerService;
 import org.university.Services.StudentService;
 import org.university.dto.LecturerDTO;
+import org.university.dto.LecturerResponseDTO;
 import org.university.dto.StudentDTO;
 import org.university.dto.StudentResponseDTO;
 
@@ -82,6 +83,12 @@ public class AdminController {
     @Path("student/{id}")
     public StudentResponseDTO getStudent(@PathParam("id") Long id){
         return studentService.getSpecficStudentDetails(id);
+    }
+
+    @GET
+    @Path("lecturer/{id}")
+    public LecturerResponseDTO getLecturer(@PathParam("id") Long id){
+        return lecturerService.getLecturerDetails(id);
     }
 
 }

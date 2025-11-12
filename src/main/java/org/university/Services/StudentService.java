@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import org.university.Mappers.StudentMapper;
 import org.university.Mappers.StudentResponseMapper;
+import org.university.Models.Status;
 import org.university.Models.StudentModel;
 import org.university.Repositories.StudentRepo;
 import org.university.dto.StudentDTO;
@@ -52,7 +53,7 @@ public class StudentService {
         existingStudent.setFirstName(dto.getFirstName());
         existingStudent.setLastName(dto.getLastName());
         existingStudent.setEmail(dto.getEmail());
-        existingStudent.setStatus("active");
+        existingStudent.setStatus(Status.ACTIVE);
 
         return studentMapper.toDTO(existingStudent);
     }
@@ -65,7 +66,7 @@ public class StudentService {
             throw new NotFoundException("Student not found");
         }
 
-        existingStudent.setStatus("inactive");
+        existingStudent.setStatus(Status.INACTIVE);
     }
 
     public StudentResponseDTO getSpecficStudentDetails(Long id){

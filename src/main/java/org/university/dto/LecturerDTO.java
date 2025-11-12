@@ -2,6 +2,7 @@ package org.university.dto;
 
 import jakarta.persistence.Column;
 import lombok.Data;
+import org.university.Models.Status;
 
 @Data
 public class LecturerDTO {
@@ -15,6 +16,6 @@ public class LecturerDTO {
 
     private String lastName;
 
-    private String status; // ACTIVE / INACTIVE
+    private Status status; // ACTIVE / INACTIVE
 
 }

@@ -5,9 +5,12 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import org.university.Mappers.LecturerMapper;
+import org.university.Mappers.LecturerResponseMapper;
 import org.university.Models.LecturerModel;
+import org.university.Models.Status;
 import org.university.Repositories.LecturerRepo;
 import org.university.dto.LecturerDTO;
+import org.university.dto.LecturerResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +23,9 @@ public class LecturerService {
 
     @Inject
     LecturerMapper lecturerMapper;
+
+    @Inject
+    LecturerResponseMapper lecturerResponseMapper;
 
     public List<LecturerDTO> getAllLectures(){
         List<LecturerModel> lecturers = lecturerRepo.listAll();
@@ -59,6 +65,19 @@ public class LecturerService {
             throw new NotFoundException("Lecturer with id " + id + " not found");
         }
 
-        lecturer.setStatus("inactive");
+        lecturer.setStatus(Status.INACTIVE);
     }
+
+    public LecturerResponseDTO getLecturerDetails(Long id){
+        LecturerModel lecturer = lecturerRepo.findById(id);
+        if(lecturer == null){
+            throw new NotFoundException("Lecturer with id " + id + " not found");
+        }
+
+        lecturer.getCourses().size();
+        lecturer.getSubjects().size();
+
+        return lecturerResponseMapper.toDto(lecturer);
+    }
+
 }

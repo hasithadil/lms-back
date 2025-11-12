@@ -33,7 +33,8 @@ public class StudentModel  {
     private String lastName;
 
     @Column(nullable = false)
-    private String status;  // e.g., "ACTIVE", "INACTIVE"
+    @Enumerated(EnumType.STRING)
+    private Status status;  // e.g., "ACTIVE", "INACTIVE"
 
     // reverse mapping to enrollements
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)

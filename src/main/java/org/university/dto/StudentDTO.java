@@ -1,6 +1,7 @@
 package org.university.dto;
 
 import lombok.Data;
+import org.university.Models.Status;
 
 @Data
 public class StudentDTO {
@@ -10,5 +11,5 @@ public class StudentDTO {
     private String email;
     private String firstName;
     private String lastName;
-    private String status;
+    private Status status;
 }
