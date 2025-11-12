@@ -7,6 +7,7 @@ import org.university.Services.LecturerService;
 import org.university.Services.StudentService;
 import org.university.dto.LecturerDTO;
 import org.university.dto.StudentDTO;
+import org.university.dto.StudentResponseDTO;
 
 import java.util.List;
 
@@ -75,6 +76,12 @@ public class AdminController {
     @Path("/deletelecturer/{id}")
     public void deleteLecturer(@PathParam("id") long id){
         lecturerService.deleteLecturer(id);
+    }
+
+    @GET
+    @Path("student/{id}")
+    public StudentResponseDTO getStudent(@PathParam("id") Long id){
+        return studentService.getSpecficStudentDetails(id);
     }
 
 }

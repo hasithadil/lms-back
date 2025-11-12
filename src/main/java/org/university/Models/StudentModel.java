@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -31,5 +34,10 @@ public class StudentModel  {
 
     @Column(nullable = false)
     private String status;  // e.g., "ACTIVE", "INACTIVE"
+
+    // reverse mapping to enrollements
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "test")
+    private List<EnrollmentModel> enrollments = new ArrayList<>();
 
 }

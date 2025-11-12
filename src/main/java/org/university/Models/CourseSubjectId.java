@@ -10,8 +10,8 @@ import java.util.Objects;
 
 public class CourseSubjectId implements Serializable {
 
-    public long courseId;
-    public long subjectId;
+    public Long courseId;
+    public Long subjectId;
 
     public CourseSubjectId(long courseId, long subjectId) {
         this.courseId = courseId;

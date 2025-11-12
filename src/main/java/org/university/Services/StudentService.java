@@ -5,9 +5,11 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import org.university.Mappers.StudentMapper;
+import org.university.Mappers.StudentResponseMapper;
 import org.university.Models.StudentModel;
 import org.university.Repositories.StudentRepo;
 import org.university.dto.StudentDTO;
+import org.university.dto.StudentResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,9 @@ public class StudentService {
 
     @Inject
     StudentMapper studentMapper;
+
+    @Inject
+    StudentResponseMapper studentResponseMapper;
 
     public List<StudentDTO> getAllStudents(){
         List<StudentModel> students = studentRepo.listAll();
@@ -61,5 +66,17 @@ public class StudentService {
         }
 
         existingStudent.setStatus("inactive");
+    }
+
+    public StudentResponseDTO getSpecficStudentDetails(Long id){
+        StudentModel student = studentRepo.findById(id);
+        if (student == null){
+            throw new NotFoundException("Student not found");
+        }
+
+        // Force fetch enrollments if they are lazy-loaded
+        student.getEnrollments().size();
+
+        return studentResponseMapper.toDto(student);
     }
 }

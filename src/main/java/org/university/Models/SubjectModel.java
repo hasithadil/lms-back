@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -14,7 +17,7 @@ public class SubjectModel  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sub_id")
-    private long subId;
+    private Long subId;
 
     @Column(name = "sub_name" , nullable = false)
     private String subjectName;
@@ -22,4 +25,7 @@ public class SubjectModel  {
     @ManyToOne
     @JoinColumn(name = "lec_id")
     private LecturerModel lecturer;
+
+    @OneToMany(mappedBy = "subjectId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Course_SubjectModel> courseSubjects = new ArrayList<>();
 }
