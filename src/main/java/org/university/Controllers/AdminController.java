@@ -3,12 +3,10 @@ package org.university.Controllers;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.university.Services.CourseService;
 import org.university.Services.LecturerService;
 import org.university.Services.StudentService;
-import org.university.dto.LecturerDTO;
-import org.university.dto.LecturerResponseDTO;
-import org.university.dto.StudentDTO;
-import org.university.dto.StudentResponseDTO;
+import org.university.dto.*;
 
 import java.util.List;
 
@@ -17,6 +15,9 @@ public class AdminController {
 
     @Inject
     StudentService studentService;
+
+    @Inject
+    CourseService courseService;
 
     @GET
     @Path("/allstudents")
@@ -89,6 +90,12 @@ public class AdminController {
     @Path("lecturer/{id}")
     public LecturerResponseDTO getLecturer(@PathParam("id") Long id){
         return lecturerService.getLecturerDetails(id);
+    }
+
+    @GET
+    @Path("/course/{id}")
+    public CourseResponseDTO getCourse(@PathParam("id") Long id){
+        return courseService.getCourseDetails(id);
     }
 
 }

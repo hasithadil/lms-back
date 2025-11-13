@@ -6,11 +6,14 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.university.Mappers.CourseMapper;
+import org.university.Mappers.CourseResponseMapper;
 import org.university.Models.CourseModel;
 import org.university.Models.LecturerModel;
 import org.university.Repositories.CourseRepo;
+import org.university.Repositories.EnrollmentRepo;
 import org.university.Repositories.LecturerRepo;
 import org.university.dto.CourseDTO;
+import org.university.dto.CourseResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +28,12 @@ public class CourseService {
 
     @Inject
     LecturerRepo lecturerRepo;
+
+    @Inject
+    CourseResponseMapper courseResponseMapper;
+    @Inject
+    EnrollmentRepo enrollmentRepo;
+
 
     public List<CourseDTO> getAllCourses(){
         List<CourseModel> courses = courseRepo.listAll();
@@ -80,5 +89,22 @@ public class CourseService {
         }
 
         courseRepo.delete(course);
+    }
+
+    public CourseResponseDTO getCourseDetails(Long id){
+        CourseModel course = courseRepo.findById(id);
+
+        if(course == null){
+            throw new NotFoundException("Course not found");
+        }
+
+        Long enrolledCount = enrollmentRepo.count("course_id", id);
+        int enrolledCountINT = enrolledCount.intValue();
+
+        CourseResponseDTO dto = courseResponseMapper.toDto(course);
+        dto.setEnrolledCount(enrolledCountINT);
+        dto.setAvailableSlots(dto.getMaxStudent() - enrolledCountINT);
+
+        return dto;
     }
 }
