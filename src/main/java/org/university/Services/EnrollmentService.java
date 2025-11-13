@@ -50,6 +50,14 @@ public class EnrollmentService {
             throw new IllegalStateException("Course max student");
         }
 
+        boolean alreadyEnrolled = enrollmentRepo
+                .count("student.s_id = ?1 and course.courseId = ?2", dto.getStudentId(), dto.getCourseId()) > 0;
+
+        if (alreadyEnrolled) {
+            throw new IllegalStateException("Student already enrolled in this course");
+        }
+
+
         EnrollmentModel enrollment = new EnrollmentModel();
         enrollment.setStudent(student);
         enrollment.setCourse(course);
