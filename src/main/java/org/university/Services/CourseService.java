@@ -98,7 +98,7 @@ public class CourseService {
             throw new NotFoundException("Course not found");
         }
 
-        Long enrolledCount = enrollmentRepo.count("course_id", id);
+        Long enrolledCount = enrollmentRepo.count("course.courseId", id);
         int enrolledCountINT = enrolledCount.intValue();
 
         CourseResponseDTO dto = courseResponseMapper.toDto(course);

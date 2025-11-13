@@ -17,74 +17,65 @@ public class LecturerController {
     @Inject
     CourseService courseService;
 
+    @Inject
+    SubjectService subjectService;
+
+    @Inject
+    CourseSubjectService courseSubjectService;
+
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/getallcourses")
+    @Path("/courses")
     public List<CourseDTO> getAllCourses(){
         return courseService.getAllCourses();
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/addcourse")
+    @Path("/courses")
     public CourseDTO addCourse(CourseDTO dto){
         return courseService.createCourse(dto);
     }
 
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/updatecourse/{id}")
+    @Path("/course/{id}")
     public CourseDTO updateCourse(@PathParam("id") long id,CourseDTO dto){
         return courseService.updateCourse(id,dto);
     }
 
     @DELETE
-    @Path("/deletecourse/{id}")
+    @Path("/course/{id}")
     public void deleteCourse(@PathParam("id") long id){
         courseService.deleteCourse(id);
     }
 
-    @Inject
-    SubjectService subjectService;
 
     @GET
-    @Path("/getallsubjects")
+    @Path("/subjects")
     public List<SubjectDTO> getAllSubjects(){
         return subjectService.getAllSubjects();
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/addsubject")
+    @Path("/subjects")
     public SubjectDTO addSubject(SubjectDTO dto){
         return subjectService.createSubject(dto);
     }
 
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/updatesubject/{id}")
+    @Path("/subject/{id}")
     public SubjectDTO updateSubject(@PathParam("id") long id, SubjectDTO dto){
         return subjectService.updateSubject(id, dto);
     }
 
     @DELETE
-    @Path("/deletesubject/{id}")
+    @Path("/subject/{id}")
     public void deleteSubject(@PathParam("id") long id){
         subjectService.deleteSubject(id);
     }
 
-    @Inject
-    CourseSubjectService courseSubjectService;
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/addsubjecttocourse")
+    @Path("/subjecttocourse")
     public CourseSubjectDTO addSubjectToCourse(CourseSubjectDTO dto){
         return courseSubjectService.addSubjectToCourse(dto);
     }

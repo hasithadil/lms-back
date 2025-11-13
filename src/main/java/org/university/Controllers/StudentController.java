@@ -14,7 +14,7 @@ public class StudentController {
     EnrollmentService enrollmentService;
 
     @POST
-    @Path("/enrollment")
+    @Path("/enroll")
     public EnrollmentDTO enrollment(EnrollmentDTO dto){
         return enrollmentService.enrollStudent(dto);
     }

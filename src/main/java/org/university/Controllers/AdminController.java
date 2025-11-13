@@ -19,63 +19,55 @@ public class AdminController {
     @Inject
     CourseService courseService;
 
-    @GET
-    @Path("/allstudents")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<StudentDTO> getAllStudents(){
-        return studentService.getAllStudents();
-    }
-
-    @POST
-    @Path("/addstudent")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public StudentDTO addStudent(StudentDTO dto){
-        return studentService.createStudent(dto);
-    }
-
-    @PUT
-    @Path("/updatestudent/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public StudentDTO updateStudent(StudentDTO dto, @PathParam("id") long id){
-        return studentService.updateStudent(id,dto);
-    }
-
-    @DELETE
-    @Path("/deletestudent/{id}")
-    public void deleteStudent(@PathParam("id") long id){
-        studentService.deleteStudent(id);
-    }
 
     @Inject
     LecturerService lecturerService;
 
     @GET
-    @Path("/getalllecturers")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/students")
+    public List<StudentDTO> getAllStudents(){
+        return studentService.getAllStudents();
+    }
+
+    @POST
+    @Path("/students")
+    public StudentDTO addStudent(StudentDTO dto){
+        return studentService.createStudent(dto);
+    }
+
+    @PUT
+    @Path("/student/{id}")
+    public StudentDTO updateStudent(StudentDTO dto, @PathParam("id") Long id){
+        return studentService.updateStudent(id,dto);
+    }
+
+    @DELETE
+    @Path("/student/{id}")
+    public void deleteStudent(@PathParam("id") long id){
+        studentService.deleteStudent(id);
+    }
+
+
+    @GET
+    @Path("/lecturers")
     public List<LecturerDTO> getAllLecturers(){
         return lecturerService.getAllLectures();
     }
 
     @POST
-    @Path("/addlecturer")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/lecturers")
     public LecturerDTO createLecturer(LecturerDTO dto){
         return lecturerService.createLecturer(dto);
     }
 
     @PUT
-    @Path("/updatelecturer/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/lecturer/{id}")
     public LecturerDTO updateLecturer(@PathParam("id") long id, LecturerDTO dto){
         return lecturerService.updatelecturer(id,dto);
     }
 
     @DELETE
-    @Path("/deletelecturer/{id}")
+    @Path("/lecturer/{id}")
     public void deleteLecturer(@PathParam("id") long id){
         lecturerService.deleteLecturer(id);
     }

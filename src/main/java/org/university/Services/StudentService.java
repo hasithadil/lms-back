@@ -42,7 +42,7 @@ public class StudentService {
     }
 
     @Transactional
-    public StudentDTO updateStudent(long id, StudentDTO dto){
+    public StudentDTO updateStudent(Long id, StudentDTO dto){
         StudentModel existingStudent = studentRepo.findById(id);
 
         if (existingStudent == null){
