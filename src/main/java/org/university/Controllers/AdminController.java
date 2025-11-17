@@ -85,6 +85,12 @@ public class AdminController {
     }
 
     @GET
+    @Path("/courses")
+    public List<CourseDTO>  getAllCourses(){
+        return courseService.getAllCourses();
+    }
+
+    @GET
     @Path("/course/{id}")
     public CourseResponseDTO getCourse(@PathParam("id") Long id){
         return courseService.getCourseDetails(id);
