@@ -7,10 +7,7 @@ import org.university.Services.CourseService;
 import org.university.Services.CourseSubjectService;
 import org.university.Services.LecturerService;
 import org.university.Services.SubjectService;
-import org.university.dto.CourseDTO;
-import org.university.dto.CourseSubjectDTO;
-import org.university.dto.LecturerResponseDTO;
-import org.university.dto.SubjectDTO;
+import org.university.dto.*;
 
 import java.util.List;
 
@@ -102,4 +99,11 @@ public class LecturerController {
     public void deleteSubject(@PathParam("courseId") long courseId, @PathParam("subjectId") long subjectId){
         courseSubjectService.removeSubjectFromCourse(courseId, subjectId);
     }
+
+    @GET
+    @Path("/course/{id}")
+    public CourseResponseDTO getCourse(@PathParam("id") Long id){
+        return courseService.getCourseDetails(id);
+    }
+
 }
