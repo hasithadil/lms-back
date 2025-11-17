@@ -5,9 +5,11 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.university.Services.CourseService;
 import org.university.Services.CourseSubjectService;
+import org.university.Services.LecturerService;
 import org.university.Services.SubjectService;
 import org.university.dto.CourseDTO;
 import org.university.dto.CourseSubjectDTO;
+import org.university.dto.LecturerResponseDTO;
 import org.university.dto.SubjectDTO;
 
 import java.util.List;
@@ -22,6 +24,15 @@ public class LecturerController {
 
     @Inject
     CourseSubjectService courseSubjectService;
+
+    @Inject
+    LecturerService lecturerService;
+
+    @GET
+    @Path("/{id}")
+    public LecturerResponseDTO getLecturer(@PathParam("id") Long id){
+        return lecturerService.getLecturerDetails(id);
+    }
 
 
     @GET
