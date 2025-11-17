@@ -28,7 +28,7 @@ public class StudentService {
     StudentResponseMapper studentResponseMapper;
 
     public List<StudentDTO> getAllStudents(){
-        List<StudentModel> students = studentRepo.listAll();
+        List<StudentModel> students = studentRepo.list("ORDER BY status ASC");
 
         return students.stream().map(studentMapper::toDTO).collect(Collectors.toList());
     }

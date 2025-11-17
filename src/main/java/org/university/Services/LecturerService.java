@@ -28,7 +28,7 @@ public class LecturerService {
     LecturerResponseMapper lecturerResponseMapper;
 
     public List<LecturerDTO> getAllLectures(){
-        List<LecturerModel> lecturers = lecturerRepo.listAll();
+        List<LecturerModel> lecturers = lecturerRepo.list("ORDER BY status ASC");
 
         return lecturers.stream().map(lecturerMapper::toDTO).collect(Collectors.toList());
     }
