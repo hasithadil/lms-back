@@ -1,19 +1,18 @@
 package org.university.Controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.university.Repositories.EnrollmentRepo;
 import org.university.Services.CourseService;
 import org.university.Services.EnrollmentService;
 import org.university.Services.StudentService;
-import org.university.dto.CourseDTO;
-import org.university.dto.CourseResponseDTO;
-import org.university.dto.EnrollmentDTO;
-import org.university.dto.StudentResponseDTO;
+import org.university.dto.*;
 
 import java.util.List;
 
 @Path("/student")
+@RolesAllowed("STUDENT")
 public class StudentController {
     @Inject
     EnrollmentService enrollmentService;
@@ -23,6 +22,12 @@ public class StudentController {
 
     @Inject
     CourseService courseService;
+
+    @GET
+    @Path("/students")
+    public List<StudentDTO> getAllStudents(){
+        return studentService.getAllStudents();
+    }
 
     @GET
     @Path("/{id}")
