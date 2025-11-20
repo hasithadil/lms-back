@@ -1,8 +1,11 @@
 package org.university.Controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.SecurityContext;
 import org.university.Services.CourseService;
 import org.university.Services.LecturerService;
 import org.university.Services.StudentService;
@@ -11,6 +14,7 @@ import org.university.dto.*;
 import java.util.List;
 
 @Path("/admin")
+@RolesAllowed("ADMIN")
 public class AdminController {
 
     @Inject
@@ -31,7 +35,12 @@ public class AdminController {
 
     @POST
     @Path("/students")
-    public StudentDTO addStudent(StudentDTO dto){
+    public StudentDTO addStudent(StudentDTO dto, @Context SecurityContext ctx){
+        System.out.println("📥 AdminController.addStudent() called!");
+        System.out.println("User: " + ctx.getUserPrincipal().getName());
+        System.out.println("===============");
+
+
         return studentService.createStudent(dto);
     }
 

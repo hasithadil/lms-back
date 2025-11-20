@@ -1,5 +1,6 @@
 package org.university.Controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -12,6 +13,7 @@ import org.university.dto.*;
 import java.util.List;
 
 @Path("lecturer")
+@RolesAllowed("LECTURER")
 public class LecturerController {
     @Inject
     CourseService courseService;
@@ -24,6 +26,12 @@ public class LecturerController {
 
     @Inject
     LecturerService lecturerService;
+
+    @GET
+    @Path("/lecturers")
+    public List<LecturerDTO> getAllLecturers(){
+        return lecturerService.getAllLectures();
+    }
 
     @GET
     @Path("/{id}")
