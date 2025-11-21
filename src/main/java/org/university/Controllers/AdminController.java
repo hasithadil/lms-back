@@ -36,10 +36,6 @@ public class AdminController {
     @POST
     @Path("/students")
     public StudentDTO addStudent(StudentDTO dto, @Context SecurityContext ctx){
-        System.out.println("📥 AdminController.addStudent() called!");
-        System.out.println("User: " + ctx.getUserPrincipal().getName());
-        System.out.println("===============");
-
 
         return studentService.createStudent(dto);
     }

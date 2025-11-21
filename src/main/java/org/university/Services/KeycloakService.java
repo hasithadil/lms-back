@@ -124,11 +124,9 @@ public class KeycloakService {
      */
     private void assignRole(RealmResource realmResource, String userId, String roleName) {
         try {
-            System.out.println("🔍 Attempting to assign role: " + roleName);
 
             // Get the role
             RoleRepresentation role = realmResource.roles().get(roleName).toRepresentation();
-            System.out.println("✅ Found role: " + role.getName());
 
             // Assign role to user
             realmResource.users()
@@ -137,10 +135,8 @@ public class KeycloakService {
                     .realmLevel()
                     .add(Collections.singletonList(role));
 
-            System.out.println("✅ Role assigned successfully");
 
         } catch (Exception e) {
-            System.err.println("❌ Error assigning role '" + roleName + "': " + e.getMessage());
             throw new RuntimeException("Failed to assign role '" + roleName + "'. Make sure the role exists in Keycloak!", e);
         }
     }
