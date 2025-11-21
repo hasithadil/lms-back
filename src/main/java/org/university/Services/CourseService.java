@@ -50,6 +50,16 @@ public class CourseService {
             throw new NotFoundException("Lecturer not found");
         }
 
+        String courseName = dto.getName().trim().toLowerCase();
+
+        boolean courseExists = courseRepo.find("LOWER(name)", courseName)
+                .firstResultOptional()
+                .isPresent();
+
+        if (courseExists) {
+            throw new IllegalStateException("A course with the name '" + dto.getName() + "' already exists");
+        }
+
         CourseModel course = courseMapper.toModel(dto);
         course.setLecturer(lecturer);
 

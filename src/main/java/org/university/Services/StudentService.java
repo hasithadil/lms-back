@@ -126,24 +126,9 @@ public class StudentService {
     @Transactional
     public StudentDTO createStudent(StudentDTO dto){
 
-        System.out.println("🔵 STEP 1: StudentService.createStudent() called");
-        System.out.println("Email: " + dto.getEmail());
-        System.out.println("FirstName: " + dto.getFirstName());
-        System.out.println("LastName: " + dto.getLastName());
-        // ============================================
-        // CHANGED: Create user in Keycloak FIRST
-        // ============================================
-//        String keycloakId = keycloakService.createUser(
-//                dto.getEmail(),          // Email
-//                dto.getFirstName(),      // First name
-//                dto.getLastName(),       // Last name
-//                "STUDENT"                // Role (IMPORTANT!)
-//        );
-
         String keycloakId = null;
 
         try {
-            System.out.println("🔵 STEP 2: About to call KeycloakService.createUser()");
 
             keycloakId = keycloakService.createUser(
                     dto.getEmail(),          // Email
@@ -152,18 +137,11 @@ public class StudentService {
                     "STUDENT"                // Role - use YOUR actual role name
             );
 
-            System.out.println("🔵 STEP 3: KeycloakService returned successfully");
-            System.out.println("✅ keycloakId: " + keycloakId);
 
         } catch (Exception e) {
-            System.err.println("❌❌❌ ERROR in KeycloakService.createUser() ❌❌❌");
-            System.err.println("Error message: " + e.getMessage());
-            System.err.println("Error class: " + e.getClass().getName());
             e.printStackTrace();
             throw new RuntimeException("Failed to create user in Keycloak: " + e.getMessage(), e);
         }
-
-        System.out.println("keycloakId:"+keycloakId);
 
 
         // ============================================
