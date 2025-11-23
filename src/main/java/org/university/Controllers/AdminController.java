@@ -52,6 +52,12 @@ public class AdminController {
         studentService.deleteStudent(id);
     }
 
+    @PUT
+    @Path("/student/{id}/reactivate")
+    public void reactivateStudent(@PathParam("id") long id) {
+        studentService.reactivateStudent(id);
+    }
+
 
     @GET
     @Path("/lecturers")
@@ -76,6 +82,13 @@ public class AdminController {
     public void deleteLecturer(@PathParam("id") long id){
         lecturerService.deleteLecturer(id);
     }
+
+    @PUT
+    @Path("/lecturer/{id}/reactivate")
+    public void reactivateLecturer(@PathParam("id") long id) {
+        lecturerService.reactivateLecturer(id);
+    }
+
 
     @GET
     @Path("student/{id}")
