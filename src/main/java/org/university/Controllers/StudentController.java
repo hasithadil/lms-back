@@ -4,9 +4,7 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.university.Repositories.EnrollmentRepo;
-import org.university.Services.CourseService;
-import org.university.Services.EnrollmentService;
-import org.university.Services.StudentService;
+import org.university.Services.*;
 import org.university.dto.*;
 
 import java.util.List;
@@ -22,6 +20,12 @@ public class StudentController {
 
     @Inject
     CourseService courseService;
+
+    @Inject
+    TopicService topicService;
+
+    @Inject
+    StudentProgresService studentProgresService;
 
     @GET
     @Path("/students")
@@ -63,6 +67,40 @@ public class StudentController {
     @Path("/course/{id}")
     public CourseResponseDTO getCourse(@PathParam("id") Long id){
         return courseService.getCourseDetails(id);
+    }
+
+    @GET
+    @Path("/subject/{subjectId}/topics")
+    public List<TopicDTO> getTopicsBySubject(@PathParam("subjectId") Long subjectId) {
+        return topicService.getTopicsBySubject(subjectId);
+    }
+
+    @POST
+    @Path("{studentId}/progress/mark")
+    public TopicProgressDTO markProgress(@PathParam("studentId") Long studentId,TopicProgressDTO dto){
+        return studentProgresService.markTopicProgress(studentId,dto);
+    }
+
+    @GET
+    @Path("/{studentId}/progress/subject/{subjectId}")
+    public SubjectProgressDTO getProgressInSubject(
+            @PathParam("studentId") Long studentId,
+            @PathParam("subjectId") Long subjectId) {
+        return studentProgresService.getStudentProgressInSubject(studentId, subjectId);
+    }
+
+    @GET
+    @Path("/{studentId}/progress/course/{courseId}")
+    public CourseProgressDTO getProgressInCourse(
+            @PathParam("studentId") Long studentId,
+            @PathParam("courseId") Long courseId) {
+        return studentProgresService.getStudentProgressInCourse(studentId, courseId);
+    }
+
+    @GET
+    @Path("/{studentId}/progress/overall")
+    public StudentOverallProgressDTO getOverallProgress(@PathParam("studentId") Long studentId) {
+        return studentProgresService.getStudentOverallProgress(studentId);
     }
 
 }

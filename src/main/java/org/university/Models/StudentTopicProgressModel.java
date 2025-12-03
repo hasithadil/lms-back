@@ -22,5 +22,5 @@ public class StudentTopicProgressModel {
     private TopicModel topic;
 
     @Column(name = "is_completed" , nullable = false)
-    private boolean isCompleted =false;
+    private Boolean isCompleted =false;
 }

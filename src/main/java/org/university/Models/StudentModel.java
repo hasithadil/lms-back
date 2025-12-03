@@ -41,4 +41,7 @@ public class StudentModel  {
     @Column(name = "test")
     private List<EnrollmentModel> enrollments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentTopicProgressModel> topicProgress = new ArrayList<>();
+
 }

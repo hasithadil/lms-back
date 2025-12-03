@@ -4,10 +4,7 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.university.Services.CourseService;
-import org.university.Services.CourseSubjectService;
-import org.university.Services.LecturerService;
-import org.university.Services.SubjectService;
+import org.university.Services.*;
 import org.university.dto.*;
 
 import java.util.List;
@@ -26,6 +23,9 @@ public class LecturerController {
 
     @Inject
     LecturerService lecturerService;
+
+    @Inject
+    TopicService topicService;
 
     @GET
     @Path("/lecturers")
@@ -87,6 +87,18 @@ public class LecturerController {
     @Path("/subject/{id}")
     public void deleteSubject(@PathParam("id") long id){
         subjectService.deleteSubject(id);
+    }
+
+    @GET
+    @Path("/subject/{id}/topics")
+    public List<TopicDTO> getAllTopics(@PathParam("id") long id){
+        return topicService.getTopicsBySubject(id);
+    }
+
+    @POST
+    @Path("/{subjectId}/topics")
+    public TopicDTO createTopic(@PathParam("subjectId") Long subjectId, TopicDTO dto){
+        return topicService.createTopic(subjectId,dto);
     }
 
 
