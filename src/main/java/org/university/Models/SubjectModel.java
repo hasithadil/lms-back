@@ -22,6 +22,9 @@ public class SubjectModel  {
     @Column(name = "sub_name" , nullable = false)
     private String subjectName;
 
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TopicModel> topics = new ArrayList<>();  // By initializing it with = new ArrayList<>(); ensure it's always an empty but usable list from the start
+
     @ManyToOne
     @JoinColumn(name = "lec_id")
     private LecturerModel lecturer;
