@@ -45,100 +45,6 @@ A full-featured REST API backend for a Learning Management System, built with **
 
 ---
 
-## API Endpoints
-
-### Admin (`/admin`) — Role: `ADMIN`
-
-#### Students
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/admin/students` | List all students |
-| POST | `/admin/students` | Create student (syncs to Keycloak) |
-| GET | `/admin/student/{id}` | Get student with enrollment details |
-| PUT | `/admin/student/{id}` | Update student info |
-| DELETE | `/admin/student/{id}` | Soft-deactivate student |
-| PUT | `/admin/student/{id}/reactivate` | Reactivate deactivated student |
-
-#### Lecturers
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/admin/lecturers` | List all lecturers |
-| POST | `/admin/lecturers` | Create lecturer (syncs to Keycloak) |
-| GET | `/admin/lecturer/{id}` | Get lecturer with courses/subjects |
-| PUT | `/admin/lecturer/{id}` | Update lecturer info |
-| DELETE | `/admin/lecturer/{id}` | Soft-deactivate lecturer |
-| PUT | `/admin/lecturer/{id}/reactivate` | Reactivate deactivated lecturer |
-
-#### Courses
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/admin/courses` | List all courses |
-| GET | `/admin/course/{id}` | Get course with enrollment count |
-
----
-
-### Student (`/student`) — Role: `STUDENT`
-
-#### Profile & Enrollment
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/student/students` | List all students |
-| GET | `/student/{id}` | Get student details |
-| POST | `/student/enroll` | Enroll in a course |
-| GET | `/student/enroll/{id}` | Get student's enrollments |
-| DELETE | `/student/unenroll/{studentId}/{courseId}` | Unenroll from course |
-
-#### Courses & Content
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/student/courses` | Browse all courses |
-| GET | `/student/course/{id}` | Get course details |
-| GET | `/student/subject/{subjectId}/topics` | Get topics in a subject |
-
-#### Progress
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/student/{studentId}/progress/mark` | Mark a topic as completed |
-| GET | `/student/{studentId}/progress/subject/{subjectId}` | Progress in a subject |
-| GET | `/student/{studentId}/progress/course/{courseId}` | Progress in a course |
-| GET | `/student/{studentId}/progress/overall` | Overall progress (all courses) |
-
----
-
-### Lecturer (`/lecturer`) — Role: `LECTURER`
-
-#### Courses
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/lecturer/courses` | List all courses |
-| POST | `/lecturer/courses` | Create course |
-| GET | `/lecturer/course/{id}` | Get course details |
-| PUT | `/lecturer/course/{id}` | Update course |
-| DELETE | `/lecturer/course/{id}` | Delete course |
-
-#### Subjects
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/lecturer/subjects` | List all subjects |
-| POST | `/lecturer/subjects` | Create subject |
-| PUT | `/lecturer/subject/{id}` | Update subject |
-| DELETE | `/lecturer/subject/{id}` | Delete subject |
-
-#### Topics
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/lecturer/subject/{id}/topics` | Get topics in subject |
-| POST | `/lecturer/{subjectId}/topics` | Create topic in subject |
-
-#### Curriculum (Course-Subject Binding)
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/lecturer/subjecttocourse` | Add subject to course |
-| GET | `/lecturer/{courseId}/subjects` | Get subjects in course |
-| DELETE | `/lecturer/course/{courseId}/subject/{subjectId}` | Remove subject from course |
-
----
-
 ## Prerequisites
 
 **Docker (recommended):** Docker + Docker Compose only — no Java or Keycloak installation needed.
@@ -220,47 +126,6 @@ docker run -p 8081:8080 \
   quay.io/keycloak/keycloak:26.0 start-dev --import-realm
 ```
 
-### 4. Run in development mode
-
-```bash
-./mvnw quarkus:dev
-```
-
-The API starts at `http://localhost:8080`. Tables are auto-created by Hibernate on first run.
-
-**Swagger UI** (dev mode only): `http://localhost:8080/q/swagger-ui`
-
----
-
-## Production Build
-
-```bash
-# Build Docker image (multi-stage — no local Java required)
-docker build -t lms-back .
-
-# Or build JAR manually
-./mvnw package -DskipTests
-java -jar target/quarkus-app/quarkus-run.jar
-```
-
-Set all environment variables before running. Do not use the defaults in production.
-
----
-
-## CI/CD — GitHub Actions
-
-On every push to `master`, GitHub Actions:
-1. Builds the Docker image
-2. Pushes it to GitHub Container Registry (`ghcr.io`)
-
-The published image is available at:
-```
-ghcr.io/hasithadil/lms-back:latest
-```
-
-To deploy elsewhere (Railway, Render, Fly.io), point the platform at this repository — it will find the root `Dockerfile` automatically.
-
----
 
 ## Project Structure
 
@@ -289,6 +154,3 @@ src/main/java/org/university/
 
 ---
 
-## License
-
-MIT
